@@ -14,7 +14,9 @@ contract Bank {
     mapping (address => uint256) public balances;
     mapping (address => bool) public isDeposit;
     address[] public depositors;
-    uint256 public totalETH;
+    
+    // 直接存储前三名存款人
+    address[3] public topDepositors;
     
     constructor() {
         owner = msg.sender;
@@ -23,6 +25,26 @@ contract Bank {
     modifier onlyOwner{
         require(msg.sender==owner,"Caller is not the owner");
         _;
+    }
+
+    // 更新前三名存款人
+    function _updateTopDepositors(address depositor) private {
+        uint256 amount = balances[depositor];
+        
+        // 检查是否需要更新前三名
+        if (topDepositors[0] == address(0) || amount > balances[topDepositors[0]]) {
+            // 新的第一名，其他依次后移
+            topDepositors[2] = topDepositors[1];
+            topDepositors[1] = topDepositors[0];
+            topDepositors[0] = depositor;
+        } else if (topDepositors[1] == address(0) || amount > balances[topDepositors[1]]) {
+            // 新的第二名，第二名后移
+            topDepositors[2] = topDepositors[1];
+            topDepositors[1] = depositor;
+        } else if (topDepositors[2] == address(0) || amount > balances[topDepositors[2]]) {
+            // 新的第三名
+            topDepositors[2] = depositor;
+        }
     }
 
     receive() external payable {
@@ -34,36 +56,20 @@ contract Bank {
             depositors.push(msg.sender);
         }
         balances[msg.sender] += msg.value;
-        totalETH += msg.value;
         
+        // 每次存款后更新前三名
+        _updateTopDepositors(msg.sender);
     }
 
     function withdraw(uint256 amount) public onlyOwner {
-        require(amount <= totalETH, "Not enough funds!");
+        require(amount <= address(this).balance, "Not enough funds!");
         (bool success,) = msg.sender.call{value: amount}("");
         require(success, "withdraw failed!");
-        totalETH -= amount;
         emit withdrawETH(msg.sender, amount);
     }
 
-    function getTop3Depositor() public view returns (address[3] memory){
-        //由于top3Depositors需要被修改，不能使用calldata
-        address[3] memory top3Depositors;
-        for (uint256 i = 0; i < depositors.length; i++) {
-            if (top3Depositors[0] == address(0) || balances[depositors[i]] > balances[top3Depositors[0]]) {
-                // 依次往后挪
-                top3Depositors[2] = top3Depositors[1];
-                top3Depositors[1] = top3Depositors[0];
-                top3Depositors[0] = depositors[i];
-            } else if (top3Depositors[1] == address(0) || balances[depositors[i]] > balances[top3Depositors[1]] ) {
-                top3Depositors[2] = top3Depositors[1];
-                top3Depositors[1] = depositors[i];
-            } else if (top3Depositors[2] == address(0) || balances[depositors[i]] > balances[top3Depositors[2]] ){
-                top3Depositors[2] = depositors[i];
-            }
-        }
-        return top3Depositors;
+    function getTop3Depositor() public view returns (address[3] memory) {
+        // 直接返回储存的前三名，不需要遍历
+        return topDepositors;
     }
-
-
 }
