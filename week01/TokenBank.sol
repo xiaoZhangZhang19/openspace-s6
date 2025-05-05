@@ -38,8 +38,7 @@ contract TokenBank {
     //执行depoist前需要用户授权bank合约能够transfer代币
     function deposit(uint256 _depositAmount) public {
         require(_depositAmount > 0, "must > zero amount");
-        //当用户调用Bank合约的deposit函数时，执行的代码是Bank合约中的代码。虽然交易是由用户发起的(msg.sender是用户)，
-        //但实际执行代码的是Bank合约。
+        //当出现合约调用合约的场景时，调用transferfrom的msg.sender是TokenBank合约地址。但是在当前deposit函数运行的msg.sender是调用此函数的EOA用户地址
         require(IERC20(tokenAddress).transferFrom(msg.sender, address(this), _depositAmount),"transfer failed!");
         tokenBalances[msg.sender] += _depositAmount;
         emit depositLog(msg.sender, _depositAmount);
