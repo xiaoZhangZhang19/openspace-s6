@@ -7,9 +7,11 @@ pragma solidity 0.8.26;
 // 编写 withdraw() 方法，仅管理员可以通过该方法提取资金。
 // 用数组记录存款金额的前 3 名用户
 
+import './IBank.sol';
+
 event withdrawETH(address, uint);
 
-contract Bank {
+contract Bank is IBank {  
     address public owner;
     mapping (address => uint256) public balances;
     mapping (address => bool) public isDeposit;
@@ -47,7 +49,7 @@ contract Bank {
         }
     }
 
-    receive() external payable {
+    fallback() external payable virtual {
         require(msg.value > 0, "Amount must > 0");
 
         if (!isDeposit[msg.sender]) {
@@ -61,11 +63,10 @@ contract Bank {
         _updateTopDepositors(msg.sender);
     }
 
-    function withdraw(uint256 amount) public onlyOwner {
-        require(amount <= address(this).balance, "Not enough funds!");
-        (bool success,) = msg.sender.call{value: amount}("");
+    function withdraw() public onlyOwner {
+        (bool success,) = msg.sender.call{value: address(this).balance}("");
         require(success, "withdraw failed!");
-        emit withdrawETH(msg.sender, amount);
+        emit withdrawETH(msg.sender, address(this).balance);
     }
 
     function getTop3Depositor() public view returns (address[3] memory) {
