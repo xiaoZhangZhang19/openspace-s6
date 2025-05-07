@@ -41,7 +41,7 @@ contract NFTMarket is ERC20TokenReceiver, ERC721Holder, ReentrancyGuard {
         require(price > 0, "NFTMarket: price must be greater than zero");
         require(IERC721(nftContract).ownerOf(tokenId) == msg.sender, "NFTMarket: not the owner of NFT");
         
-        // 将NFT转移到市场合约
+        // 将NFT转移到市场合约，执行之前需要用户给NFTMarket授权
         IERC721(nftContract).safeTransferFrom(msg.sender, address(this), tokenId);
         
         // 记录上架信息
