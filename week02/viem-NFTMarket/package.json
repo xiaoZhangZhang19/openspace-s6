@@ -1,0 +1,19 @@
+{
+  "name": "viem-playground",
+  "version": "1.0.0",
+  "description": "A playground for testing viem code",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/example.ts",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "viem": "^2.8.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0",
+    "tsx": "^4.7.0"
+  }
+}
