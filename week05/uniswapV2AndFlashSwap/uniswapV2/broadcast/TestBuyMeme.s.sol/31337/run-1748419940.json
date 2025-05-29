@@ -1,0 +1,88 @@
+{
+  "transactions": [
+    {
+      "hash": "0x56ca81642d27929491ae66d0e990d50fa3606aeb314520afc223304152bcb939",
+      "transactionType": "CALL",
+      "contractName": "TestBuyMeme",
+      "contractAddress": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+      "function": "dumpTokenPrice(address)",
+      "arguments": [
+        "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+      ],
+      "transaction": {
+        "from": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "to": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+        "gas": "0x73a2",
+        "value": "0x0",
+        "input": "0x24a34110000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "nonce": "0x18",
+        "chainId": "0x7a69"
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0x5831d7a25f3748922e28c2f27e9b7de50161388694f74a0eea22850efba17ddd",
+      "transactionType": "CALL",
+      "contractName": "TestBuyMeme",
+      "contractAddress": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+      "function": "buyTokensViaUniswap(address)",
+      "arguments": [
+        "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+      ],
+      "transaction": {
+        "from": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "to": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+        "gas": "0x73a2",
+        "value": "0x0",
+        "input": "0xbfac9a5a000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+        "nonce": "0x19",
+        "chainId": "0x7a69"
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    }
+  ],
+  "receipts": [
+    {
+      "status": "0x1",
+      "cumulativeGasUsed": "0x53b8",
+      "logs": [],
+      "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "type": "0x2",
+      "transactionHash": "0x56ca81642d27929491ae66d0e990d50fa3606aeb314520afc223304152bcb939",
+      "transactionIndex": "0x0",
+      "blockHash": "0xa42750cea6b9e0155f9b5fe349d407d3852c9f0f626dd65ab734880b44b6b6d1",
+      "blockNumber": "0xd",
+      "gasUsed": "0x53b8",
+      "effectiveGasPrice": "0xe124ed8",
+      "blobGasPrice": "0x1",
+      "from": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+      "to": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+      "contractAddress": null
+    },
+    {
+      "status": "0x1",
+      "cumulativeGasUsed": "0x53b8",
+      "logs": [],
+      "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "type": "0x2",
+      "transactionHash": "0x5831d7a25f3748922e28c2f27e9b7de50161388694f74a0eea22850efba17ddd",
+      "transactionIndex": "0x0",
+      "blockHash": "0xe85aaf3ff02ab27c8bd69b6e02f790becfa596b3b7d5b6923835c3f4a6f70447",
+      "blockNumber": "0xe",
+      "gasUsed": "0x53b8",
+      "effectiveGasPrice": "0xc50a9b2",
+      "blobGasPrice": "0x1",
+      "from": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+      "to": "0x9f7cf1d1f558e57ef88a59ac3d47214ef25b6a06",
+      "contractAddress": null
+    }
+  ],
+  "libraries": [],
+  "pending": [],
+  "returns": {},
+  "timestamp": 1748419940,
+  "chain": 31337,
+  "commit": null
+}
